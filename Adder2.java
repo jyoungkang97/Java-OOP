@@ -17,7 +17,6 @@ public class Adder {
     int operand1 = 3;
     int operand2 = 2;
     
-    adfhafl
     
     Scanner sc = new Scanner(System.in);
     
