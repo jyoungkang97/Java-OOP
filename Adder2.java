@@ -16,7 +16,6 @@ public class Adder {
     int sum = 0;
     int operand1 = 3;
     int operand2 = 2;
-     jk
      
     Scanner sc = new Scanner(System.in);
     
