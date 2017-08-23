@@ -17,7 +17,6 @@ public class GuessMe {
         
         System.out.println("Guess a number 1 - 100.");
         int guess = inputReader.nextInt();
-        // guess = inputReader.nextInt();
         
         if (guess == 90) {
         System.out.println("genius!");  }
