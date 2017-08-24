@@ -19,5 +19,7 @@ public class StayPositive {
             System.out.println(num);
             num--;
         }      
+        
+        
     }
 }
