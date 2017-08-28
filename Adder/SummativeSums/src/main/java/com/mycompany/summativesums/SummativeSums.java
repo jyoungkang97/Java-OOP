@@ -20,7 +20,7 @@ public class SummativeSums {
         int[] numbers3 = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, -99};
 
         int sum = 0;
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < numbers.length; i++) {
             sum += numbers[i];
             System.out.println("#1 Array Sum: " + sum);
         }

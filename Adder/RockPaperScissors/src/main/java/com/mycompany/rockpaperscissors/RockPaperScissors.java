@@ -29,9 +29,11 @@ public class RockPaperScissors {
         while (KeepPlaying) {
             System.out.println("Hello " + userName + " Type 1 for rock, 2 for paper, or 3 for scissors");
             int userChoice = sc.nextInt();
+
             System.out.println("You chose: " + userChoice);
             int[] computerOptions = {1, 2, 3};
             int computerRandom = r.nextInt(computerOptions.length);
+
             System.out.println("The computer got : " + computerOptions[computerRandom]);
             int computerChoice = computerOptions[computerRandom];
 
@@ -76,8 +78,7 @@ public class RockPaperScissors {
                 KeepPlaying = false;
             }
             roundsPlayed++;
-            
-            
+
         }
 
     }
