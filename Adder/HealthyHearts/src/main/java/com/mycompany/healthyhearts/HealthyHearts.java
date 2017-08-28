@@ -20,6 +20,6 @@ public class HealthyHearts {
         int low = (int) (maxRate *.5);
         int high =  (int) (maxRate * .85);
         
-        System.out.println("Your target heartrate zone is " + low + "-" + high "beats per minute");
+        System.out.println("Your target heartrate zone is " + low + "-" + high + "beats per minute");
     }
 }
