@@ -5,8 +5,6 @@
  */
 package com.mycompany.summativesums;
 
-import java.util.Arrays;
-
 /**
  *
  * @author jyoun
