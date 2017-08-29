@@ -14,19 +14,21 @@ import java.util.Scanner;
  */
 public class RockPaperScissors {
 
-    public static boolean KeepPlaying = true;
+    public static boolean keepPlaying = true;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Let's play Rock, Paper, Scissors! First, what is your name?");
-
         String userName = sc.next();
         Random r = new Random();
+
+        System.out.println("How many rounds would you like to play?");
+        int wantedRounds = sc.nextInt();
         int userScore = 0;
         int computerScore = 0;
-        int roundsPlayed = 0;
+        int roundsPlayed = 1;
 
-        while (KeepPlaying) {
+        while (keepPlaying) {
             System.out.println("Hello " + userName + " Type 1 for rock, 2 for paper, or 3 for scissors");
             int userChoice = sc.nextInt();
 
@@ -74,10 +76,17 @@ public class RockPaperScissors {
                 System.out.println("User score: " + userScore + " Computer score : " + computerScore);
             }
 
-            if (roundsPlayed == 10) {
-                KeepPlaying = false;
+            if (roundsPlayed == wantedRounds) {
+                keepPlaying = false;
             }
             roundsPlayed++;
+            System.out.println("Do you want to play again? Yes or no");
+            String playAgain = sc.next();
+            if (playAgain.equalsIgnoreCase("no")) {
+                keepPlaying = false;
+            } else {
+                keepPlaying = true;
+            }
 
         }
 
