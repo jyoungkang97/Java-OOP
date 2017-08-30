@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package james.cards;
+package com.mycompany.polymorphismdata;
 
 /**
  *
  * @author jyoun
  */
-public class App {
-    public static void main(String[] args) {
-        Deck deck = new Deck ();
-        int x = 0;
-    }
+public class Bike {
+    int speedLimit = 90;
 }
