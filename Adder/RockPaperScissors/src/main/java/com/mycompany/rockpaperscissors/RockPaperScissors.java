@@ -86,7 +86,11 @@ public class RockPaperScissors {
             }
             System.out.println("Would you like to play again? Y or N");
             String playAnother = sc.next();
-            if (playAnother == "N") {
+            if ("Y".equalsIgnoreCase(playAnother)) {
+                playAgain = true;
+                keepPlaying = true;
+            }
+            if ("N".equalsIgnoreCase(playAnother)) {
                 playAgain = false;
                 keepPlaying = false;
             }
