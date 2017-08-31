@@ -40,24 +40,48 @@ public class UserIOImpl implements UserIO{
 
     @Override
     public float readFloat(String prompt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        print(prompt);
+        String input = sc.nextLine();
+        return Float.parseFloat(input);
     }
-
+//////
     @Override
     public float readFloat(String prompt, float min, float max) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        do {
+        print(prompt);
+        String input = sc.nextLine();
+        float f = Float.parseFloat(input);
+        if (f >= min && f<= max) {
+            return f;
+        } else {
+            System.out.println("Invalid input, enter a value from " + min + " to " + max);
+        }
+    } while (true);
     }
 
     @Override
     public int readInt(String prompt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        print(prompt);
+        String input = sc.nextLine();
+        int i = Integer.parseInt(input);
+        return i;
     }
+    
 
     @Override
     public int readInt(String prompt, int min, int max) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        do {
+        print(prompt);
+        String input = sc.nextLine();
+        int i = Integer.parseInt(input);
+        if (i >= min && i <= max) {
+            return i;
+        } else {
+            System.out.println("Invalid input, enter a value from " + min + "to " + max);
+        }
+    } while (true);
     }
-
+    
     @Override
     public long readLong(String prompt) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

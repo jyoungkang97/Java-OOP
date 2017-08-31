@@ -15,7 +15,7 @@ public class Main {
         
         io.print("Testing message.");
         
-        double d = io.readDouble("Enter a double 1-10");
-        System.out.println(d);
+        int i = io.readInt("Enter a int 1-10", 1, 10);
+        System.out.println(i);
     }
 }

@@ -17,6 +17,10 @@ public class RockPaperScissors {
     public static boolean keepPlaying = true;
 
     public static void main(String[] args) {
+        boolean playAgain = true;
+        
+        while (playAgain == true) {
+        
         Scanner sc = new Scanner(System.in);
         System.out.println("Let's play Rock, Paper, Scissors! First, what is your name?");
         String userName = sc.next();
@@ -43,7 +47,6 @@ public class RockPaperScissors {
                 System.out.println("It's a draw");
                 System.out.println("Amount of rounds : " + roundsPlayed);
                 System.out.println("User score: " + userScore + " Computer score : " + computerScore);
-
             } else if (computerChoice == 1 && userChoice == 2) {
                 System.out.println("User wins!");
                 userScore++;
@@ -80,13 +83,17 @@ public class RockPaperScissors {
                 keepPlaying = false;
             }
             roundsPlayed++;
-            System.out.println("Do you want to play again? Yes or no");
-            String playAgain = sc.next();
-            if (playAgain.equalsIgnoreCase("no")) {
-                keepPlaying = false;
-            } else {
-                keepPlaying = true;
             }
+            System.out.println("Would you like to play again? Y or N");
+            String playAnother = sc.next();
+            if (playAnother == "N") {
+                playAgain = false;
+                keepPlaying = false;
+            }
+            }
+
         }
-    }
-}
+        }
+        
+    
+
