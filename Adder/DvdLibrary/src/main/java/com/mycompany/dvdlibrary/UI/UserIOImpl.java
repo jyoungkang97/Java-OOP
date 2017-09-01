@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.userio;
+package com.mycompany.dvdlibrary.UI;
+
 import java.util.Scanner;
+
 /**
  *
  * @author jyoun
  */
-public class UserIOImpl implements UserIO{
-    Scanner sc = new Scanner(System.in);
+public class UserIOImpl implements UserIO {
+        Scanner sc = new Scanner(System.in);
     
     @Override
     public void print(String message) {
@@ -110,3 +112,4 @@ public class UserIOImpl implements UserIO{
     }
     
 }
+
