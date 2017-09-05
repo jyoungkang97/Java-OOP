@@ -104,6 +104,7 @@ public class DvdLibraryController  {
         view.displayEditDvdBanner();
         String title = view.getDvdTitle();
         Dvd editDvd = view.getNewDvdInfo();
+        dao.removeDvd(title);
         dao.editDvd(editDvd.getTitle(), editDvd);
         view.displayEditDvdSuccessBanner();
         
