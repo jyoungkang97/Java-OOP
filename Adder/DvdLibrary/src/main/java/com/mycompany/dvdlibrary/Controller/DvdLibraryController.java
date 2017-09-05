@@ -6,6 +6,7 @@
 package com.mycompany.dvdlibrary.Controller;
 
 import com.mycompany.dvdlibrary.DTO.Dvd;
+import com.mycompany.dvdlibrary.Dao.DvdExceptionsDAO;
 import com.mycompany.dvdlibrary.Dao.DvdLibraryDAO;
 import com.mycompany.dvdlibrary.UI.View;
 import java.util.List;
@@ -31,6 +32,7 @@ public class DvdLibraryController  {
         boolean keepGoing = true;
         int menuSelection = 0;
 
+        try {
         while (keepGoing) {
 
             
@@ -62,33 +64,36 @@ public class DvdLibraryController  {
             }
         }
         exitMessage();
+        } catch (DvdExceptionsDAO e) {
+            view.displayErrorMessage(e.getMessage());
+        }
     }
 
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
 
-    private void createDvd() {
+    private void createDvd() throws DvdExceptionsDAO{
         view.displayCreateDvdBanner();
         Dvd newDvd = view.getNewDvdInfo();
         dao.addDvd(newDvd.getTitle(), newDvd);
         view.displayCreateSuccessBanner();
     }
 
-    private void listDvds() {
+    private void listDvds() throws DvdExceptionsDAO{
         view.displayDisplayAllBanner();
         List<Dvd> studentList = dao.getAllDvds();
         view.displayDvdList(studentList);
     }
 
-    private void viewDvd() {
+    private void viewDvd() throws DvdExceptionsDAO {
         view.displayDisplayDvdBanner();
         String title = view.getDvdTitleChoice();
         Dvd dvd = dao.getDvd(title);
         view.displayDvd(dvd);
 
     }
-    private void removeDvd() {
+    private void removeDvd() throws DvdExceptionsDAO {
         view.displayRemoveDvd();
             String title = view.getDvdTitleChoice();
             dao.removeDvd(title);
@@ -100,7 +105,7 @@ public class DvdLibraryController  {
     private void exitMessage() {
         view.displayExitBanner();
     }
-    private void editDvd(){
+    private void editDvd() throws DvdExceptionsDAO{
         view.displayEditDvdBanner();
         String title = view.getDvdTitle();
         Dvd editDvd = view.getNewDvdInfo();

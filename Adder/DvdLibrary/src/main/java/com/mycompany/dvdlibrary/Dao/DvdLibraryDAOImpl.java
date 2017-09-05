@@ -29,33 +29,39 @@ public class DvdLibraryDAOImpl implements DvdLibraryDAO {
     
     
     @Override
-    public Dvd addDvd(String title, Dvd dvd) throws DvdExceptionsDAO  {
-    
+    public Dvd addDvd(String title, Dvd dvd) 
+            throws DvdExceptionsDAO {
         Dvd newDvd = Dvds.put(title, dvd);
         writeRoster();
         return newDvd;
     }
 
     @Override
-    public List<Dvd> getAllDvds() {
+    public List<Dvd> getAllDvds()
+    throws DvdExceptionsDAO{
+        loadRoster();
         return new ArrayList<Dvd>(Dvds.values());
     }
 
     @Override
-    public Dvd getDvd(String title) {
+    public Dvd getDvd(String title) 
+    throws DvdExceptionsDAO{
+        loadRoster(); 
         return Dvds.get(title);
     }
 
     @Override
-    public Dvd removeDvd(String title) {
+    public Dvd removeDvd(String title) 
+    throws DvdExceptionsDAO{
         Dvd removedDvd = Dvds.remove(title);
+        writeRoster();
         return removedDvd;
     }
     public Dvd editDvd(String title, Dvd dvd) {
         Dvd editedDvd = Dvds.put(title, dvd);
         return editedDvd;
     }
-    private void loadRoaser() throws DvdExceptionsDAO, FileNotFoundException {
+    private void loadRoster() throws DvdExceptionsDAO  {
         Scanner sc;
         try {
             sc = new Scanner(

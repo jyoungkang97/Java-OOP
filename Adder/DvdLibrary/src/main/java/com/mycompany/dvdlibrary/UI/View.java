@@ -106,6 +106,11 @@ public class View{
 
         io.print("The DVD was edited and updated in the library. Please hit enter to continue.");
     }
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERRROR ===");
+        io.print(errorMsg);
+        
+    }
     
 }
 
