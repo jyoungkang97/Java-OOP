@@ -6,6 +6,7 @@
 package com.mycompany.dvdlibrary.Dao;
 
 import com.mycompany.dvdlibrary.DTO.Dvd;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class DvdLibraryDAOImpl implements DvdLibraryDAO {
     private Map<String, Dvd> Dvds = new HashMap<>();
     
+    
     @Override
     public Dvd addDvd(String title, Dvd dvd) {
         Dvd newDvd = Dvds.put(title, dvd);
@@ -25,18 +27,22 @@ public class DvdLibraryDAOImpl implements DvdLibraryDAO {
 
     @Override
     public List<Dvd> getAllDvds() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList<Dvd>(Dvds.values());
     }
 
     @Override
-    public Dvd getDvd(String dvd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Dvd getDvd(String title) {
+        return Dvds.get(title);
     }
 
     @Override
-    public Dvd removeDvd(String dvd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Dvd removeDvd(String title) {
+        Dvd removedDvd = Dvds.remove(title);
+        return removedDvd;
     }
-    
+    public Dvd editDvd(String title, Dvd dvd) {
+        Dvd editedDvd = Dvds.put(title, dvd);
+        return editedDvd;
+    }
 }
 

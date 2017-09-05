@@ -7,65 +7,105 @@ package com.mycompany.dvdlibrary.Controller;
 
 import com.mycompany.dvdlibrary.DTO.Dvd;
 import com.mycompany.dvdlibrary.Dao.DvdLibraryDAO;
-import com.mycompany.dvdlibrary.Dao.DvdLibraryDAOImpl;
-import com.mycompany.dvdlibrary.UI.UserIO;
-import com.mycompany.dvdlibrary.UI.UserIOImpl;
 import com.mycompany.dvdlibrary.UI.View;
+import java.util.List;
 
 /**
  *
  * @author jyoun
  */
-public class DvdLibraryController {
-    View view = new View();
-    DvdLibraryDAO dao = new DvdLibraryDAOImpl();
-    private UserIO io = new UserIOImpl();
-    
-    public void run () {
+
+public class DvdLibraryController  {
+    DvdLibraryDAO dao;
+    View view;
+
+    public DvdLibraryController(DvdLibraryDAO dao, View view) {
+        
+    this.dao = dao;
+    this.view = view;
+    }
+
+
+
+    public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
-        
+
         while (keepGoing) {
 
             
             menuSelection = getMenuSelection();
-   
+
             switch (menuSelection) {
                 case 1:
                     createDvd();
-                    break; 
+                    break;
                 case 2:
-                    io.print("Remove DVD");
+                    removeDvd();
                     break;
                 case 3:
-                    io.print("Edit DVD");
+                    editDvd();
                     break;
-                case 4: 
-                    io.print("List all DVD");
+                case 4:
+                    listDvds();
                     break;
                 case 5:
-                    io.print("List particular DVD");
+                    viewDvd();
                     break;
                 case 6:
                     keepGoing = false;
                     break;
-                
+
                 default:
-                    io.print("Unknown input");
-                    
+                    unknownCommand();
+
             }
         }
-        io.print("Bye");
+        exitMessage();
     }
+
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
+
     private void createDvd() {
         view.displayCreateDvdBanner();
         Dvd newDvd = view.getNewDvdInfo();
         dao.addDvd(newDvd.getTitle(), newDvd);
         view.displayCreateSuccessBanner();
     }
-    
-    
+
+    private void listDvds() {
+        view.displayDisplayAllBanner();
+        List<Dvd> studentList = dao.getAllDvds();
+        view.displayDvdList(studentList);
+    }
+
+    private void viewDvd() {
+        view.displayDisplayDvdBanner();
+        String title = view.getDvdTitleChoice();
+        Dvd dvd = dao.getDvd(title);
+        view.displayDvd(dvd);
+
+    }
+    private void removeDvd() {
+        view.displayRemoveDvd();
+            String title = view.getDvdTitleChoice();
+            dao.removeDvd(title);
+            view.displayRemoveSuccessBanner();
+    }
+    private void unknownCommand() {
+        view.displayUnknownCommandBanner();
+    }
+    private void exitMessage() {
+        view.displayExitBanner();
+    }
+    private void editDvd(){
+        view.displayEditDvdBanner();
+        String title = view.getDvdTitle();
+        Dvd editDvd = view.getNewDvdInfo();
+        dao.editDvd(editDvd.getTitle(), editDvd);
+        view.displayEditDvdSuccessBanner();
+        
+    }
 }

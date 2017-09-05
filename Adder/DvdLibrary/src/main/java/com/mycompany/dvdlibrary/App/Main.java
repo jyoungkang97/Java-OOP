@@ -6,6 +6,11 @@
 package com.mycompany.dvdlibrary.App;
 
 import com.mycompany.dvdlibrary.Controller.DvdLibraryController;
+import com.mycompany.dvdlibrary.Dao.DvdLibraryDAO;
+import com.mycompany.dvdlibrary.Dao.DvdLibraryDAOImpl;
+import com.mycompany.dvdlibrary.UI.UserIO;
+import com.mycompany.dvdlibrary.UI.UserIOImpl;
+import com.mycompany.dvdlibrary.UI.View;
 
 /**
  *
@@ -13,7 +18,10 @@ import com.mycompany.dvdlibrary.Controller.DvdLibraryController;
  */
 public class Main {
     public static void main(String[] args) {
-         DvdLibraryController controller = new DvdLibraryController();
-         controller.run();
+        UserIO myIo = new UserIOImpl();
+        View myView = new View(myIo);
+        DvdLibraryDAO myDao = new DvdLibraryDAOImpl();
+        DvdLibraryController controller = new DvdLibraryController(myDao, myView);
+        controller.run();
     }
 }

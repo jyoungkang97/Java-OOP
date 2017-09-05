@@ -21,4 +21,6 @@ public interface DvdLibraryDAO {
     Dvd getDvd(String dvd);
     
     Dvd removeDvd(String dvd);
+    
+    Dvd editDvd(String title, Dvd dvd);
 }

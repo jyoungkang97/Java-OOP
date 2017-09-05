@@ -6,13 +6,19 @@
 package com.mycompany.dvdlibrary.UI;
 
 import com.mycompany.dvdlibrary.DTO.Dvd;
+import java.util.List;
 
 /**
  *
  * @author jyoun
  */
-public class View {
-    UserIO io = new UserIOImpl();
+
+public class View{
+    
+    private UserIO io;    
+    public View(UserIO io) {
+        this.io = io;
+    }
     
     public int printMenuAndGetSelection() {
             io.print("Main Menu");
@@ -29,7 +35,7 @@ public class View {
     public Dvd getNewDvdInfo() {
         String title = io.readString("Please enter a title");
         String releaseDate = io.readString("Please enter a release date, example : " + "May 18, 2015");
-        Integer rating = io.readInt("Please enter a number 1-10.");
+        String rating = io.readString("Please enter a rating.");
         String directorName = io.readString("Please enter director name.");
         String studio = io.readString("Please enter the studio.");
         String note = io.readString("Please enter any notes or comments.");
@@ -42,11 +48,64 @@ public class View {
         currentDvd.setNote(note);
         return currentDvd;
     }
+    public String getDvdTitle() {
+        return io.readString("Enter the DVD Title.");
+    }
     public void displayCreateDvdBanner() {
         io.print("=== Create Dvd ===");
     }
     public void displayCreateSuccessBanner() {
         io.print("DVD created successfully, please hit enter to continue.");
     }
+    public void displayDvdList(List<Dvd> dvdList) {
+        for(Dvd currentDvd : dvdList) {
+            io.print(currentDvd.getReleaseDate() + ": "
+                    + currentDvd.getTitle() + ", Director: "
+                    + currentDvd.getDirectorName());
+        }
+        io.print("Please hit enter to continue");
+    }
+    public void displayDisplayAllBanner() {
+        io.print("=== Display All DVD's ===");
+    }
+    public void displayDisplayDvdBanner () {
+        io.print("=== Display DVD ===");
+    }
+    public String getDvdTitleChoice() {
+        return io.readString("Enter a DVD title");
+    }
+    public void displayDvd(Dvd dvds) {
+        if (dvds != null) {
+            io.print(dvds.getTitle());
+            io.print(dvds.getDirectorName());
+            io.print(dvds.getStudio());
+            io.print(dvds.getReleaseDate());
+            io.print("");
+        } else {
+            io.print("No such DVD");
+        }
+        io.print("Please hit enter to continue.");
+    }
+    public void displayRemoveDvd () {
+        io.print("=== Remove DVD ===");
+    }
+    public void displayRemoveSuccessBanner () {
+        io.print("DVD successfully removed.");
+    }
+    public void displayExitBanner () {
+        io.print("Good Bye!");
+    }
+    public void displayUnknownCommandBanner () {
+        io.print("Unknown command, please input one of the given commands!");
+    }
+    public void displayEditDvdBanner() {
+
+        io.print("=== Edit DVD ===");
+    }
+    public void displayEditDvdSuccessBanner() {
+
+        io.print("The DVD was edited and updated in the library. Please hit enter to continue.");
+    }
+    
 }
 

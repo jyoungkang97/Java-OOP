@@ -10,10 +10,14 @@ package com.mycompany.dvdlibrary.DTO;
  * @author jyoun
  */
 public class Dvd {
+
+    public static Dvd get(String title) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private String title;
     private String releaseDate;
-    private Integer rating;
+    private String rating;
     private String directorName;
     private String studio;
     private String note;
@@ -40,11 +44,11 @@ public class Dvd {
         this.releaseDate = releaseDate;
     }
 
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
