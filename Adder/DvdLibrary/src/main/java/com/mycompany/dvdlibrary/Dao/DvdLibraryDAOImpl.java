@@ -22,7 +22,7 @@ import java.util.Scanner;
  * @author jyoun
  */
 public class DvdLibraryDAOImpl implements DvdLibraryDAO {
-    public static final String ROSTER_FILE = "roster.txt";
+    public static final String ROSTER_FILE = "Library.txt";
 	public static final String DELIMITER = "::";
         
     private Map<String, Dvd> Dvds = new HashMap<>();
