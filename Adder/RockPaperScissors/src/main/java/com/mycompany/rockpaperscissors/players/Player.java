@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.agerange;
+package com.mycompany.rockpaperscissors.players;
 
 /**
  *
  * @author jyoun
  */
-public class AgeRange {
-    public static void main(String[] args) {
-        
-    }
+public interface Player {
+    String getUser();
+    int getChoice();
+    
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.dvdlibrary.Dao;
+
 import com.mycompany.dvdlibrary.DTO.Dvd;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -22,14 +23,14 @@ import java.util.Scanner;
  * @author jyoun
  */
 public class DvdLibraryDAOImpl implements DvdLibraryDAO {
+
     public static final String ROSTER_FILE = "Library.txt";
-	public static final String DELIMITER = "::";
-        
+    public static final String DELIMITER = "::";
+
     private Map<String, Dvd> Dvds = new HashMap<>();
-    
-    
+
     @Override
-    public Dvd addDvd(String title, Dvd dvd) 
+    public Dvd addDvd(String title, Dvd dvd)
             throws DvdExceptionsDAO {
         Dvd newDvd = Dvds.put(title, dvd);
         writeRoster();
@@ -38,30 +39,32 @@ public class DvdLibraryDAOImpl implements DvdLibraryDAO {
 
     @Override
     public List<Dvd> getAllDvds()
-    throws DvdExceptionsDAO{
+            throws DvdExceptionsDAO {
         loadRoster();
         return new ArrayList<Dvd>(Dvds.values());
     }
 
     @Override
-    public Dvd getDvd(String title) 
-    throws DvdExceptionsDAO{
-        loadRoster(); 
+    public Dvd getDvd(String title)
+            throws DvdExceptionsDAO {
+        loadRoster();
         return Dvds.get(title);
     }
 
     @Override
-    public Dvd removeDvd(String title) 
-    throws DvdExceptionsDAO{
+    public Dvd removeDvd(String title)
+            throws DvdExceptionsDAO {
         Dvd removedDvd = Dvds.remove(title);
         writeRoster();
         return removedDvd;
     }
+
     public Dvd editDvd(String title, Dvd dvd) {
         Dvd editedDvd = Dvds.put(title, dvd);
         return editedDvd;
     }
-    private void loadRoster() throws DvdExceptionsDAO  {
+
+    private void loadRoster() throws DvdExceptionsDAO {
         Scanner sc;
         try {
             sc = new Scanner(
@@ -69,7 +72,7 @@ public class DvdLibraryDAOImpl implements DvdLibraryDAO {
                             new FileReader(ROSTER_FILE)));
         } catch (FileNotFoundException e) {
             throw new DvdExceptionsDAO(
-            "Could not load roster data into memory.");
+                    "Could not load roster data into memory.");
         }
         String currentLine;
         String[] currentTokens;
@@ -82,27 +85,27 @@ public class DvdLibraryDAOImpl implements DvdLibraryDAO {
             currentDvd.setReleaseDate(currentTokens[3]);
         }
         sc.close();
-        }
-            private void writeRoster() throws DvdExceptionsDAO {
-            PrintWriter out;
-            try {
-                out = new PrintWriter(new FileWriter(ROSTER_FILE));
-            } catch (IOException e) {
-                throw new DvdExceptionsDAO(
-                "Could not save student Data.");
-            }
-            
-            List<Dvd> dvdList = this.getAllDvds();
-            for (Dvd currentDvd : dvdList) {
-                out.println(currentDvd.getTitle() + DELIMITER
-                        + currentDvd.getDirectorName() + DELIMITER
-                        + currentDvd.getReleaseDate() + DELIMITER
-                        + currentDvd.getStudio() + DELIMITER
-                        + currentDvd.getRating() + DELIMITER
-                        + currentDvd.getNote());
-                out.flush();
-            }
-            out.close();
-        } 
-}
+    }
 
+    private void writeRoster() throws DvdExceptionsDAO {
+        PrintWriter out;
+        try {
+            out = new PrintWriter(new FileWriter(ROSTER_FILE));
+        } catch (IOException e) {
+            throw new DvdExceptionsDAO(
+                    "Could not save student Data.");
+        }
+
+        List<Dvd> dvdList = this.getAllDvds();
+        for (Dvd currentDvd : dvdList) {
+            out.println(currentDvd.getTitle() + DELIMITER
+                    + currentDvd.getDirectorName() + DELIMITER
+                    + currentDvd.getReleaseDate() + DELIMITER
+                    + currentDvd.getStudio() + DELIMITER
+                    + currentDvd.getRating() + DELIMITER
+                    + currentDvd.getNote());
+            out.flush();
+        }
+        out.close();
+    }
+}

@@ -14,22 +14,21 @@ public class Dvd {
     public static Dvd get(String title) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     private String title;
     private String releaseDate;
     private String rating;
     private String directorName;
     private String studio;
     private String note;
-    
+
     public Dvd(String title) {
         this.title = title;
     }
-    
 
     public String getTitle() {
         return title;
-        
+
     }
 
     public void setTitle(String title) {
@@ -75,5 +74,5 @@ public class Dvd {
     public void setNote(String note) {
         this.note = note;
     }
-    
+
 }

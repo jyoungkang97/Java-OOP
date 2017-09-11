@@ -9,10 +9,12 @@ package com.mycompany.dvdlibrary.Dao;
  *
  * @author jyoun
  */
-public class DvdExceptionsDAO extends Exception{
+public class DvdExceptionsDAO extends Exception {
+
     public DvdExceptionsDAO(String message) {
-        super(message); 
+        super(message);
     }
+
     public DvdExceptionsDAO(String message, Throwable cause) {
         super(message, cause);
     }

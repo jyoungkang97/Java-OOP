@@ -15,12 +15,12 @@ import java.util.List;
 public interface DvdLibraryDAO {
 
     Dvd addDvd(String title, Dvd dvd) throws DvdExceptionsDAO;
-    
+
     List<Dvd> getAllDvds() throws DvdExceptionsDAO;
-    
+
     Dvd getDvd(String dvd) throws DvdExceptionsDAO;
-    
+
     Dvd removeDvd(String dvd) throws DvdExceptionsDAO;
-    
+
     Dvd editDvd(String title, Dvd dvd) throws DvdExceptionsDAO;
 }

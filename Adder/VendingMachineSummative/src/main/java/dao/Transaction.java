@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.agerange;
+package dao;
 
 /**
  *
  * @author jyoun
  */
-public class AgeRange {
-    public static void main(String[] args) {
-        
-    }
+public interface Transaction {
+    
 }

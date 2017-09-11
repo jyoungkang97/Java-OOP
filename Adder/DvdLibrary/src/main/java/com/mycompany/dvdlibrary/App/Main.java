@@ -17,6 +17,7 @@ import com.mycompany.dvdlibrary.UI.View;
  * @author jyoun
  */
 public class Main {
+
     public static void main(String[] args) {
         UserIO myIo = new UserIOImpl();
         View myView = new View(myIo);
