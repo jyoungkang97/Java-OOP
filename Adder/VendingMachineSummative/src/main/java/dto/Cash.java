@@ -10,5 +10,31 @@ package dto;
  * @author jyoun
  */
 public class Cash {
-    
+    private double wallet;
+    private double change;
+    private double addedMoney;
+
+    public double getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(double wallet) {
+        this.wallet = wallet;
+    }
+
+    public double getChange() {
+        return change;
+    }
+
+    public void setChange(double change) {
+        this.change = change;
+    }
+
+    public double getAddedMoney() {
+        return addedMoney;
+    }
+
+    public void setAddedMoney(double addedMoney) {
+        this.addedMoney = addedMoney;
+    }
 }

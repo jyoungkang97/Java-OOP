@@ -1,4 +1,4 @@
-A01 :: KIT KAT :: 100
-A02 :: HERSHEYS :: 150
-B01 :: CHIPS :: 200
-B02 :: GUM :: 75
+A01::  KIT KAT  ::1.00
+A02::  HERSHEYS  ::1.50
+B01::  CHIPS  ::2.00
+B02::  GUM  ::7.5

@@ -5,18 +5,20 @@
  */
 package dto;
 
+import java.util.List;
+
 /**
  *
  * @author jyoun
  */
 public class Item {
   private String itemName;
-  private String itemPrice;
+  private double itemPrice;
   private String itemId;
   
     public Item(String itemId) {
         this.itemId = itemId;
-
+        
         
         
     }
@@ -30,11 +32,11 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public String getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(String itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 
@@ -44,6 +46,10 @@ public class Item {
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
+    }
+
+    public List<Item> getAllItems() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
   
 }

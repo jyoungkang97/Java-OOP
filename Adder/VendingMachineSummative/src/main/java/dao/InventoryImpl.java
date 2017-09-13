@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class InventoryImpl implements Inventory {
     public List<Item> getAllItems() throws ExceptionsDAO {
         loadFile();
         return new ArrayList<Item>(items.values());
+
     }
 
     private void loadFile() throws ExceptionsDAO {
@@ -50,7 +52,7 @@ public class InventoryImpl implements Inventory {
             Item currentItem = new Item(currentTokens[0]);
 
             currentItem.setItemName(currentTokens[1]);
-            currentItem.setItemPrice(currentTokens[2]);
+            currentItem.setItemPrice(Double.parseDouble(currentTokens[2]));
 
             items.put(currentItem.getItemId(), currentItem);
         }
@@ -76,19 +78,21 @@ public class InventoryImpl implements Inventory {
         out.close();
     }
 
-    @Override
-    public int getItemPrice(String itemId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
-    public double getItemCost(String itemId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Item getItemCost(String itemId) throws ExceptionsDAO {
+         loadFile();
+         return items.get(itemId);
+         
     }
 
     @Override
     public double buy(String itemId, double money) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
+
 
 }

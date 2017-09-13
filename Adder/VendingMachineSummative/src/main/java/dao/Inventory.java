@@ -15,9 +15,10 @@ import java.util.List;
 public interface Inventory {
     List<Item> getAllItems () throws ExceptionsDAO;
     
-    int getItemPrice(String itemId);
     
-    double getItemCost(String itemId);
+    Item getItemCost(String itemId) throws ExceptionsDAO;
+            
     
-    double buy(String itemId, double money);
+    double buy(String itemId, double money) throws ExceptionsDAO;
+
 }
