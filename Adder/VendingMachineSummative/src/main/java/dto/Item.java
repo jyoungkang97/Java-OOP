@@ -5,6 +5,7 @@
  */
 package dto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class Item {
   private String itemName;
-  private double itemPrice;
+  private BigDecimal itemPrice;
   private String itemId;
   
     public Item(String itemId) {
@@ -32,11 +33,11 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public double getItemPrice() {
+    public BigDecimal getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(double itemPrice) {
+    public void setItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
     }
 

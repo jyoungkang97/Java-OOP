@@ -5,8 +5,11 @@
  */
 package app;
 
+import Service.Service;
+import Service.Serviceimpl;
 import controller.Controller;
 import dao.ExceptionsDAO;
+import dao.InsufficientFundsExceptions;
 import dao.Inventory;
 import dao.InventoryImpl;
 import ui.UserIO;
@@ -18,11 +21,13 @@ import ui.View;
  * @author jyoun
  */
 public class Main {
-    public static void main(String[] args) throws ExceptionsDAO {
+    public static void main(String[] args) throws ExceptionsDAO, InsufficientFundsExceptions {
+        
         UserIO myIo = new UserIOImpl();
         View myView = new View(myIo);
         Inventory myDao = new InventoryImpl();
-        Controller controller = new Controller (myDao, myView);
+        Service service = new Serviceimpl(myDao);
+        Controller controller = new Controller (service, myView);
         controller.run();
     }
  

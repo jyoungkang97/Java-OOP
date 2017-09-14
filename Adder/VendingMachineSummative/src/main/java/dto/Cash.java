@@ -5,36 +5,38 @@
  */
 package dto;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author jyoun
  */
 public class Cash {
-    private double wallet;
-    private double change;
-    private double addedMoney;
+    private BigDecimal wallet;
+    private BigDecimal change;
+    private BigDecimal addedMoney;
 
-    public double getWallet() {
+    public BigDecimal getWallet() {
         return wallet;
     }
 
-    public void setWallet(double wallet) {
+    public void setWallet(BigDecimal wallet) {
         this.wallet = wallet;
     }
 
-    public double getChange() {
+    public BigDecimal getChange() {
         return change;
     }
 
-    public void setChange(double change) {
+    public void setChange(BigDecimal change) {
         this.change = change;
     }
 
-    public double getAddedMoney() {
+    public BigDecimal getAddedMoney() {
         return addedMoney;
     }
 
-    public void setAddedMoney(double addedMoney) {
+    public void setAddedMoney(BigDecimal addedMoney) {
         this.addedMoney = addedMoney;
     }
 }

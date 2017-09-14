@@ -6,6 +6,7 @@
 package dao;
 
 import dto.Item;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,10 +16,13 @@ import java.util.List;
 public interface Inventory {
     List<Item> getAllItems () throws ExceptionsDAO;
     
+   
+    BigDecimal BigDecimal(String currentToken) throws ExceptionsDAO;
     
-    Item getItemCost(String itemId) throws ExceptionsDAO;
+    Item getItem(String itemId) throws ExceptionsDAO;
             
     
     double buy(String itemId, double money) throws ExceptionsDAO;
+
 
 }

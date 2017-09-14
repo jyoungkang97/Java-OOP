@@ -4,24 +4,26 @@
  * and open the template in the editor.
  */
 package ui;
+
 import dto.Cash;
 import dto.Item;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 /**
  *
  * @author jyoun
  */
 public class View {
-    
+
     private UserIO io;
-    private double money;
+
     public View(UserIO io) {
         this.io = io;
-        
+
     }
-  
 
     public String displayItemMenu(List<Item> items) {
         Scanner sc = new Scanner(System.in);
@@ -29,36 +31,40 @@ public class View {
             io.print(Items.getItemId()
                     + Items.getItemName()
                     + Items.getItemPrice());
-        
+
         }
         return null;
-    }  
-    public double addMoney(){
-            money = io.readDouble("Insert money between 1 cent: .01, up to 100 dollars: 100 ", .01, 100);
-            System.out.println("Your current balance: $" + money);
-            return money;
     }
-    
+
+    public BigDecimal addMoney() {
+        String money = io.readString("Insert money between 1 cent: .01, up to 100 dollars: 100 ");
+
+        io.print("Your current balance: $" + money);
+        BigDecimal userMoney = new BigDecimal(money);
+        return userMoney;
+
+    }
 
     public String makeSelection() {
-     
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Please select an item based on item ID.  Ex. B02.");
-        String userChoice = sc.next();
-        System.out.println("You selected: " + userChoice );
-        
-                return userChoice;
+
+        String userChoice = io.readString("Enter the item ID you want.");
+        System.out.println("You selected: " + userChoice);
+
+        return userChoice;
 
     }
 
+    public void displayChange(BigDecimal change) {
+        io.print("This is your change: " + change);
+    }
 
     public void displayDisplayAllBanner() {
         io.print("===== VENDING MACHINE =====");
         io.print("=== Display All Items ===");
     }
 
-    public double displayItemPrice(Item item) {
-        double itemPrice = item.getItemPrice();
+    public BigDecimal displayItemPrice(Item item) {
+        BigDecimal itemPrice = item.getItemPrice();
         if (item != null) {
             io.print(String.format("%s", item.getItemPrice()));
         } else {
@@ -70,6 +76,7 @@ public class View {
     public void displaySnackBanner() {
         io.print("=== Display Snack ===");
     }
+
     public void displayItemId(Item item) {
         io.print(item.getItemId());
 
@@ -78,7 +85,8 @@ public class View {
     public void displayItemMenu(double money) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     public void displayWallet(Cash money, String wallet) {
         io.print(wallet);
-}
+    }
 }

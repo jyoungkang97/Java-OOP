@@ -12,8 +12,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +52,8 @@ public class InventoryImpl implements Inventory {
             Item currentItem = new Item(currentTokens[0]);
 
             currentItem.setItemName(currentTokens[1]);
-            currentItem.setItemPrice(Double.parseDouble(currentTokens[2]));
-
+            currentItem.setItemPrice(BigDecimal(currentTokens[2]));
+            
             items.put(currentItem.getItemId(), currentItem);
         }
         sc.close();
@@ -81,7 +81,7 @@ public class InventoryImpl implements Inventory {
     
 
     @Override
-    public Item getItemCost(String itemId) throws ExceptionsDAO {
+    public Item getItem(String itemId) throws ExceptionsDAO {
          loadFile();
          return items.get(itemId);
          
@@ -90,6 +90,12 @@ public class InventoryImpl implements Inventory {
     @Override
     public double buy(String itemId, double money) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public BigDecimal BigDecimal(String currentToken) throws ExceptionsDAO {
+        BigDecimal bd = new BigDecimal (currentToken);
+        return bd;
     }
 
 

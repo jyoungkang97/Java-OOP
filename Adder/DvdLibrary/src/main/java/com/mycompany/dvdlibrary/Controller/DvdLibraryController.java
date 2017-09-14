@@ -113,6 +113,5 @@ public class DvdLibraryController {
         dao.removeDvd(title);
         dao.editDvd(editDvd.getTitle(), editDvd);
         view.displayEditDvdSuccessBanner();
-
     }
 }
