@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.rockpaperscissors.players;
+package error;
 
 /**
  *
  * @author jyoun
  */
-public class EnumImpl {
-    Choices choices;
-    
-    public EnumImpl(Choices choices) {
-        this.choices = choices;
+public class VendOutOfStock extends Exception{
+
+    private String message;
+
+    public VendOutOfStock(String message) {
+        this.message = message;
     }
+
+}
 }

@@ -5,7 +5,6 @@
  */
 package ui;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -13,8 +12,9 @@ import java.util.Scanner;
  * @author jyoun
  */
 public class UserIOImpl implements UserIO {
-        Scanner sc = new Scanner(System.in);
-    
+
+    Scanner sc = new Scanner(System.in);
+
     @Override
     public void print(String message) {
         System.out.println(message);
@@ -38,7 +38,7 @@ public class UserIOImpl implements UserIO {
             } else {
                 System.out.println("Invalid input, enter a value from " + min + " to " + max);
             }
-        } while(true);
+        } while (true);
     }
 
     @Override
@@ -48,18 +48,19 @@ public class UserIOImpl implements UserIO {
         return Float.parseFloat(input);
     }
 //////
+
     @Override
     public float readFloat(String prompt, float min, float max) {
         do {
-        print(prompt);
-        String input = sc.nextLine();
-        float f = Float.parseFloat(input);
-        if (f >= min && f<= max) {
-            return f;
-        } else {
-            System.out.println("Invalid input, enter a value from " + min + " to " + max);
-        }
-    } while (true);
+            print(prompt);
+            String input = sc.nextLine();
+            float f = Float.parseFloat(input);
+            if (f >= min && f <= max) {
+                return f;
+            } else {
+                System.out.println("Invalid input, enter a value from " + min + " to " + max);
+            }
+        } while (true);
     }
 
     @Override
@@ -69,22 +70,21 @@ public class UserIOImpl implements UserIO {
         int i = Integer.parseInt(input);
         return i;
     }
-    
 
     @Override
     public int readInt(String prompt, int min, int max) {
         do {
-        print(prompt);
-        String input = sc.nextLine();
-        int i = Integer.parseInt(input);
-        if (i >= min && i <= max) {
-            return i;
-        } else {
-            System.out.println("Invalid input, enter a value from " + min + "to " + max);
-        }
-    } while (true);
+            print(prompt);
+            String input = sc.nextLine();
+            int i = Integer.parseInt(input);
+            if (i >= min && i <= max) {
+                return i;
+            } else {
+                System.out.println("Invalid input, enter a value from " + min + "to " + max);
+            }
+        } while (true);
     }
-    
+
     @Override
     public long readLong(String prompt) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -97,11 +97,11 @@ public class UserIOImpl implements UserIO {
 
     @Override
     public String readString(String prompt) {
-        print (prompt);
+        print(prompt);
         String input = sc.nextLine();
         boolean isString = false;
         while (!isString) {
-            if (input.length()> 0) {
+            if (input.length() > 0) {
                 isString = true;
             } else {
                 System.out.println("Please enter a string");
@@ -109,9 +109,7 @@ public class UserIOImpl implements UserIO {
             }
         }
         return input;
-                
+
     }
 
-    
 }
-    

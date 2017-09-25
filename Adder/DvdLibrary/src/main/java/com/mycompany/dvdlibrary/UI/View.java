@@ -61,9 +61,11 @@ public class View{
         for(Dvd currentDvd : dvdList) {
             io.print(currentDvd.getReleaseDate() + ": "
                     + currentDvd.getTitle() + ", Director: "
-                    + currentDvd.getDirectorName());
+                    + currentDvd.getDirectorName() + ", Rating: "
+                    + currentDvd.getRating() + " Studio: "
+                    + currentDvd.getStudio() + " Notes: "
+                    + currentDvd.getNote());
         }
-        io.print("Please hit enter to continue");
     }
     public void displayDisplayAllBanner() {
         io.print("=== Display All DVD's ===");
@@ -80,11 +82,12 @@ public class View{
             io.print(dvds.getDirectorName());
             io.print(dvds.getStudio());
             io.print(dvds.getReleaseDate());
+            io.print(dvds.getNote());
+            io.print(dvds.getRating());
             io.print("");
         } else {
             io.print("No such DVD");
         }
-        io.print("Please hit enter to continue.");
     }
     public void displayRemoveDvd () {
         io.print("=== Remove DVD ===");
@@ -99,9 +102,9 @@ public class View{
         io.print("Unknown command, please input one of the given commands!");
     }
     public void displayEditDvdBanner() {
-
         io.print("=== Edit DVD ===");
     }
+    
     public void displayEditDvdSuccessBanner() {
 
         io.print("The DVD was edited and updated in the library. Please hit enter to continue.");
@@ -111,6 +114,13 @@ public class View{
         io.print(errorMsg);
         
     }
-    
+    public void noDvdToEdit() {
+        io.print("There are no DVD's to edit.  Please add one to the library");
+    }
+    public void enterNewInfo() {
+        io.print("Please input updated information for this DVD.");
+    }
+
+
 }
 

@@ -5,8 +5,6 @@
  */
 package Service;
 
-import dao.ExceptionsDAO;
-import dao.InsufficientFundsExceptions;
 import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,15 +14,17 @@ import java.util.List;
  * @author jyoun
  */
 public interface Service {
-    List<Item> getAllItems () throws ExceptionsDAO;
-    
-    Item getUserChoiceItemPrice(String itemId) throws ExceptionsDAO;
-      
-    BigDecimal checkIfEnoughMoney (Item item, BigDecimal bd) throws InsufficientFundsExceptions;
-    
-    Item getItemCost(String itemId) throws ExceptionsDAO;
-            
-    
-    
+
+    List<Item> getAllItems() throws ExceptionsDAO;
+
+    BigDecimal getUserChoiceItemPrice(String itemId) throws ExceptionsDAO, InsufficientQuantity;
+
+    BigDecimal getChange(Item item, BigDecimal bd) throws InsufficientFundsExceptions, InsufficientQuantity;
+
+    Item getItemCost(String itemId) throws ExceptionsDAO, InsufficientQuantity;
+
+    BigDecimal checkSufficientFunds(Item item, BigDecimal userMoney) throws InsufficientFundsExceptions, InsufficientQuantity;
+
+    public void pullItem(Item item) throws InsufficientQuantity, ExceptionsDAO;
 
 }

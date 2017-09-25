@@ -6,13 +6,12 @@
 package controller;
 
 import Service.Service;
-import dao.ExceptionsDAO;
-import dao.InsufficientFundsExceptions;
-import dto.Cash;
+import Service.ExceptionsDAO;
+import Service.InsufficientFundsExceptions;
+import Service.InsufficientQuantity;
 import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Scanner;
 import ui.UserIO;
 import ui.View;
 
@@ -21,40 +20,65 @@ import ui.View;
  * @author jyoun
  */
 public class Controller {
+
     Service service;
     View view;
     UserIO io;
-    Cash cash;
+    Item item;
     BigDecimal money;
 
     public Controller(Service service, View view) {
         this.service = service;
         this.view = view;
-        
     }
-    
 
+    public void run() throws ExceptionsDAO, InsufficientFundsExceptions, InsufficientQuantity {
+        boolean keepGoing = true;
+        while (keepGoing == true) {
+            try {
 
-    public void run() throws ExceptionsDAO, InsufficientFundsExceptions {
-        listItems();
-        addMoney();
-        getSelectedItemPrice();
+                listItems();
+                money = addMoney();
+                BigDecimal itemPrice = getSelectedItemPrice(money);
+                try {
+                    vendItem(item, money);
+                    keepGoing = false;
+                } catch (InsufficientFundsExceptions e) {
+                    view.displayErrorMessage(e.getMessage());
+                }
+                service.getChange(item, money);
+            } catch (ExceptionsDAO | InsufficientQuantity e) {
+                view.displayErrorMessage(e.getMessage());
+            }
+        }
     }
-   
 
-    
-    private BigDecimal getSelectedItemPrice() throws ExceptionsDAO {
+    private BigDecimal getSelectedItemPrice(BigDecimal money) throws ExceptionsDAO, InsufficientFundsExceptions, InsufficientQuantity {
         String itemId = view.makeSelection();
-        Item userChoice = service.getItemCost(itemId);
-        return view.displayItemPrice(userChoice);
+        item = service.getItemCost(itemId);
+        view.displayItemPrice(item);
+        return money;
     }
-    
-    
-   
-      
-     
-    private BigDecimal addMoney() throws ExceptionsDAO {
-        BigDecimal money = view.addMoney();
+
+    private String repeat() throws ExceptionsDAO, InsufficientFundsExceptions, InsufficientQuantity {
+        String repeat = view.makeAnotherSelection();
+        if (repeat.equals("Y")) {
+            listItems();
+            money = addMoney();
+            BigDecimal itemPrice = getSelectedItemPrice(money);
+            vendItem(item, money);
+            service.getChange(item, money);
+            repeat();
+        } else {
+            return repeat;
+        }
+        return null;
+    }
+
+    private BigDecimal addMoney() throws InsufficientFundsExceptions {
+
+        money = view.addMoney();
+
         return money;
     }
 
@@ -64,30 +88,20 @@ public class Controller {
         view.displayItemMenu(items);
     }
 
-    private void vendItem(Item item) throws InsufficientFundsExceptions, ExceptionsDAO {
-       service.checkIfEnoughMoney(item, money);
-       view.displayChange(money);
-    } 
-  
+    private String runAgain(String userChoice) throws ExceptionsDAO {
+        view.makeAnotherSelection();
+        return userChoice;
 
-    
-
-    public static void changeOut(BigDecimal money) {
-        int quarters = 0;
-        int dimes = 0;
-        int nickels = 0;
-        int change = 0;
-        while (change >= 25) {
-            quarters = quarters + 1;
-            change = change - 25;
-        }
-        while (change >= 10) {
-            nickels = dimes + 1;
-            change = change - 10;
-            while (change >= 5) {
-                nickels = nickels + 1;
-                change = change - 5;
-            }
-        }
     }
+
+    private Item vendItem(Item item, BigDecimal money) throws InsufficientFundsExceptions, ExceptionsDAO, InsufficientQuantity {
+
+        service.checkSufficientFunds(item, money);
+        view.displayItemVended(item.getItemName());
+        view.displayChange(service.getChange(item, money));
+        service.pullItem(item);
+        return item;
+
+    }
+
 }

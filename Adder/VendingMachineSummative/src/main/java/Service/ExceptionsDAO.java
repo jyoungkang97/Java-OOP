@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package Service;
 
 /**
  *
  * @author jyoun
  */
-public class ExceptionsDAO extends Exception{
-    public ExceptionsDAO(String message) {
-        super (message);
+public class ExceptionsDAO extends Exception {
+
+    public ExceptionsDAO() {
+        super();
     }
+
     public ExceptionsDAO(String message, Throwable cause) {
-        super (message, cause);
+        super(message, cause);
     }
 }
-

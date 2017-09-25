@@ -6,9 +6,15 @@
 package ui;
 
 import dto.Cash;
+import dto.Currency;
+import static dto.Currency.DIME;
+import static dto.Currency.NICKEL;
+import static dto.Currency.QUARTER;
+import static dto.Currency.DOLLAR_BILL;
+import static dto.Currency.PENNY;
 import dto.Item;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.math.MathContext;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,10 +34,12 @@ public class View {
     public String displayItemMenu(List<Item> items) {
         Scanner sc = new Scanner(System.in);
         for (Item Items : items) {
-            io.print(Items.getItemId()
-                    + Items.getItemName()
-                    + Items.getItemPrice());
-
+            if (Items.getQuantity() > 0) {
+            io.print(" | Item I.D.: " + Items.getItemId() + " | Item Name: "
+                    + Items.getItemName() + " | Price: "
+                    + Items.getItemPrice() + " | Quantity: "
+                    + Items.getQuantity() + " | ");
+            }
         }
         return null;
     }
@@ -45,6 +53,11 @@ public class View {
 
     }
 
+    public String makeAnotherSelection() {
+        String displayAgain = io.readString("Would you like to make another selection? Input " + "'Y' " + "for yes." + " Enter anything else " + "for no.");
+        return displayAgain;
+    }
+
     public String makeSelection() {
 
         String userChoice = io.readString("Enter the item ID you want.");
@@ -55,8 +68,36 @@ public class View {
     }
 
     public void displayChange(BigDecimal change) {
-        io.print("This is your change: " + change);
-    }
+        double money = 100 * change.doubleValue();
+        BigDecimal moneyBigDec = new BigDecimal(money);
+        io.print("Giving you back $" + moneyBigDec.movePointLeft(2).round(MathContext.UNLIMITED) + " in:");
+
+        int numbDollars = (int) (money / Currency.DOLLAR_BILL.getValue());
+        for (double i = 0; i < numbDollars; i++) {
+            System.out.println(DOLLAR_BILL);
+        }
+        money -= numbDollars * Currency.DOLLAR_BILL.getValue();
+        int numbQuarters = (int) (money / Currency.QUARTER.getValue());
+        for (double i = 0; i < numbQuarters; i++) {
+            System.out.println(QUARTER);
+        }
+        money -= numbQuarters * Currency.QUARTER.getValue();
+        int numbDimes = (int) (money / Currency.DIME.getValue());
+        for (double i = 0; i < numbDimes; i++) {
+            System.out.println(DIME);
+        }
+        money -= numbDimes * Currency.DIME.getValue();
+        int numbNickels = (int) (money / Currency.NICKEL.getValue());
+        for (double i = 0; i < numbNickels; i++) {
+            System.out.println(NICKEL);
+        }
+        money -= numbNickels * Currency.NICKEL.getValue();
+        int numbPennies = (int) (money / Currency.PENNY.getValue());
+        for (double i = 0; i < numbPennies; i++) {
+            System.out.println(PENNY);
+        }
+        }
+    
 
     public void displayDisplayAllBanner() {
         io.print("===== VENDING MACHINE =====");
@@ -72,7 +113,10 @@ public class View {
         }
         return itemPrice;
     }
-
+    
+    public void displayErrorMessage() {
+        io.print("=== ERROR ====");
+    }
     public void displaySnackBanner() {
         io.print("=== Display Snack ===");
     }
@@ -89,4 +133,13 @@ public class View {
     public void displayWallet(Cash money, String wallet) {
         io.print(wallet);
     }
+
+    public void displayItemVended(String userChoice) {
+        io.print("here is your item: " + userChoice);
+    }
+
+    public void displayErrorMessage(String errorMsg) {
+        io.print(errorMsg);
+    }
+
 }

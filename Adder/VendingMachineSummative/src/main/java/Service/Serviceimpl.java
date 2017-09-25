@@ -5,13 +5,11 @@
  */
 package Service;
 
-import dao.ExceptionsDAO;
-import dao.InsufficientFundsExceptions;
+import controller.Controller;
 import dao.Inventory;
 import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
-import ui.UserIO;
 
 /**
  *
@@ -19,9 +17,10 @@ import ui.UserIO;
  */
 public class Serviceimpl implements Service {
 
-    UserIO io;
     Inventory dao;
-
+    Controller controller;
+    BigDecimal itemPrice;
+    int quantityException;
     public Serviceimpl(Inventory dao) {
 
         this.dao = dao;
@@ -33,26 +32,45 @@ public class Serviceimpl implements Service {
     }
 
     @Override
-    public Item getItemCost(String itemId) throws ExceptionsDAO {
+    public Item getItemCost(String itemId) throws ExceptionsDAO, InsufficientQuantity {
         return dao.getItem(itemId);
     }
 
-    
     @Override
-    public Item getUserChoiceItemPrice(String itemId) throws ExceptionsDAO {
+    public BigDecimal getUserChoiceItemPrice(String itemId) throws ExceptionsDAO, InsufficientQuantity {
         Item item = dao.getItem(itemId);
-        return item;
+        itemPrice = item.getItemPrice();
+        return itemPrice;
     }
 
     @Override
-    public BigDecimal checkIfEnoughMoney(Item item, BigDecimal userMoney) throws InsufficientFundsExceptions {
+    public BigDecimal getChange(Item item, BigDecimal userMoney) throws InsufficientFundsExceptions {
         BigDecimal itemPrice = item.getItemPrice();
-        if (itemPrice.compareTo(userMoney) <= -1) {
-            throw new InsufficientFundsExceptions();
-        }
-        BigDecimal change = userMoney.subtract(itemPrice);
-        return change;
-
+        return userMoney.subtract(itemPrice);
     }
 
+    @Override
+    public BigDecimal checkSufficientFunds(Item item, BigDecimal userMoney) throws InsufficientFundsExceptions {
+        BigDecimal itemPrice = item.getItemPrice();
+        if (userMoney.compareTo(itemPrice) >= 0) {
+            return userMoney;
+        } else {
+            throw new InsufficientFundsExceptions ();
+        }
+    }
+
+    /**
+     *
+     * @param item
+     * @throws dao.ExceptionsDAO
+     */
+    @Override
+    public void pullItem(Item item) throws ExceptionsDAO {
+        while(item.getQuantity() > 0) {
+                item.setQuantity(item.getQuantity() - 1);
+        
+        dao.update(item);
+    }
+
+    }
 }

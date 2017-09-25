@@ -5,6 +5,8 @@
  */
 package dao;
 
+import Service.ExceptionsDAO;
+import Service.InsufficientQuantity;
 import dto.Item;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -36,6 +38,10 @@ public class InventoryImpl implements Inventory {
 
     }
 
+    public void updateItem(Item item) throws ExceptionsDAO {
+        writeLibrary();
+    }
+
     private void loadFile() throws ExceptionsDAO {
         Scanner sc;
         try {
@@ -53,52 +59,55 @@ public class InventoryImpl implements Inventory {
 
             currentItem.setItemName(currentTokens[1]);
             currentItem.setItemPrice(BigDecimal(currentTokens[2]));
-            
+            currentItem.setQuantity(Integer.parseInt(currentTokens[3]));
+
             items.put(currentItem.getItemId(), currentItem);
         }
         sc.close();
     }
 
-    private void writeRoster() throws ExceptionsDAO {
+    private void writeLibrary() throws ExceptionsDAO {
         PrintWriter out;
+
         try {
             out = new PrintWriter(new FileWriter(TEXT_FILE));
         } catch (IOException e) {
-            throw new ExceptionsDAO(
-                    "Could not save item Data.");
+            throw new ExceptionsDAO("Could not save item data.", e);
         }
 
         List<Item> itemList = this.getAllItems();
         for (Item currentItem : itemList) {
             out.println(currentItem.getItemId() + DELIMITER
                     + currentItem.getItemName() + DELIMITER
-                    + currentItem.getItemPrice());
+                    + currentItem.getItemPrice() + DELIMITER
+                    + currentItem.getQuantity());
             out.flush();
         }
         out.close();
     }
 
-    
-
     @Override
-    public Item getItem(String itemId) throws ExceptionsDAO {
-         loadFile();
-         return items.get(itemId);
-         
+    public Item getItem(String itemId) throws ExceptionsDAO, InsufficientQuantity {
+        loadFile();
+        Item currentItem = items.get(itemId);
+        int checkQuantity = currentItem.getQuantity();
+        if (checkQuantity > 0) {
+        return items.get(itemId);
+        }else {
+            throw new InsufficientQuantity("Error: Not enough items in stock, please make another selection");
+        }
+
     }
 
     @Override
-    public double buy(String itemId, double money) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Item item) throws ExceptionsDAO {
+        writeLibrary();
     }
-    
+
     @Override
     public BigDecimal BigDecimal(String currentToken) throws ExceptionsDAO {
-        BigDecimal bd = new BigDecimal (currentToken);
+        BigDecimal bd = new BigDecimal(currentToken);
         return bd;
     }
-
-
-
 
 }

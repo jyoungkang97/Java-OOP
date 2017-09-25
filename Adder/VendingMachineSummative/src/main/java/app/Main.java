@@ -8,8 +8,9 @@ package app;
 import Service.Service;
 import Service.Serviceimpl;
 import controller.Controller;
-import dao.ExceptionsDAO;
-import dao.InsufficientFundsExceptions;
+import Service.ExceptionsDAO;
+import Service.InsufficientFundsExceptions;
+import Service.InsufficientQuantity;
 import dao.Inventory;
 import dao.InventoryImpl;
 import ui.UserIO;
@@ -21,14 +22,15 @@ import ui.View;
  * @author jyoun
  */
 public class Main {
-    public static void main(String[] args) throws ExceptionsDAO, InsufficientFundsExceptions {
-        
+
+    public static void main(String[] args) throws ExceptionsDAO, InsufficientFundsExceptions, InsufficientQuantity {
+
         UserIO myIo = new UserIOImpl();
         View myView = new View(myIo);
         Inventory myDao = new InventoryImpl();
         Service service = new Serviceimpl(myDao);
-        Controller controller = new Controller (service, myView);
+        Controller controller = new Controller(service, myView);
         controller.run();
     }
- 
+
 }

@@ -3,14 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package error;
 
 /**
  *
  * @author jyoun
  */
-public class InsufficientFundsExceptions extends Exception {
-    public InsufficientFundsExceptions () {
-        super();
+public class VendInsufficientFunds extends Exception{
+
+    private String message;
+
+    public VendInsufficientFunds() {
+        this.message = message;
     }
+
 }
+
+

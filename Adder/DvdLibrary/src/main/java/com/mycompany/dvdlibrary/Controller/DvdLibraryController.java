@@ -8,6 +8,7 @@ package com.mycompany.dvdlibrary.Controller;
 import com.mycompany.dvdlibrary.DTO.Dvd;
 import com.mycompany.dvdlibrary.Dao.DvdExceptionsDAO;
 import com.mycompany.dvdlibrary.Dao.DvdLibraryDAO;
+import com.mycompany.dvdlibrary.UI.UserIO;
 import com.mycompany.dvdlibrary.UI.View;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class DvdLibraryController {
 
     DvdLibraryDAO dao;
     View view;
+    UserIO io;
 
     public DvdLibraryController(DvdLibraryDAO dao, View view) {
 
@@ -79,8 +81,8 @@ public class DvdLibraryController {
 
     private void listDvds() throws DvdExceptionsDAO {
         view.displayDisplayAllBanner();
-        List<Dvd> studentList = dao.getAllDvds();
-        view.displayDvdList(studentList);
+        List<Dvd> dvdList = dao.getAllDvds();
+        view.displayDvdList(dvdList);
     }
 
     private void viewDvd() throws DvdExceptionsDAO {
@@ -107,11 +109,24 @@ public class DvdLibraryController {
     }
 
     private void editDvd() throws DvdExceptionsDAO {
+
         view.displayEditDvdBanner();
-        String title = view.getDvdTitle();
-        Dvd editDvd = view.getNewDvdInfo();
-        dao.removeDvd(title);
-        dao.editDvd(editDvd.getTitle(), editDvd);
-        view.displayEditDvdSuccessBanner();
+        List<Dvd> dvdList = dao.getAllDvds();
+        if (dvdList.size() > 0) {
+            view.displayDvdList(dvdList);
+            String title = view.getDvdTitle();
+            if (dvdList.contains(title)) {
+                view.enterNewInfo();
+                Dvd editDvd = view.getNewDvdInfo();
+                dao.removeDvd(title);
+                dao.editDvd(editDvd.getTitle(), editDvd);
+                view.displayEditDvdSuccessBanner();
+            } else {
+
+                view.noDvdToEdit();
+                createDvd();
+            }
+        }
+
     }
 }

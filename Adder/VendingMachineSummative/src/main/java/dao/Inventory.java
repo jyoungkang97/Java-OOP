@@ -5,6 +5,8 @@
  */
 package dao;
 
+import Service.ExceptionsDAO;
+import Service.InsufficientQuantity;
 import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,15 +16,13 @@ import java.util.List;
  * @author jyoun
  */
 public interface Inventory {
-    List<Item> getAllItems () throws ExceptionsDAO;
-    
-   
-    BigDecimal BigDecimal(String currentToken) throws ExceptionsDAO;
-    
-    Item getItem(String itemId) throws ExceptionsDAO;
-            
-    
-    double buy(String itemId, double money) throws ExceptionsDAO;
 
+    List<Item> getAllItems() throws ExceptionsDAO;
+
+    BigDecimal BigDecimal(String currentToken) throws ExceptionsDAO;
+
+    Item getItem(String itemId) throws ExceptionsDAO, InsufficientQuantity;
+
+    void update(Item item) throws ExceptionsDAO;
 
 }

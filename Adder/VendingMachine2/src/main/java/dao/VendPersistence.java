@@ -5,18 +5,18 @@
  */
 package dao;
 
-import ui.UserIO;
-
 /**
  *
  * @author jyoun
  */
-public class DataPersistence {
+    public class VendPersistence extends Exception {
 
-    UserIO io;
-
-    public String insufficientFundsExceptions() {
-        io.print("Not enough money!");
-        return null;
+    public VendPersistence(String message) {
+        super(message);
     }
+
+    public VendPersistence(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
 }

@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  * @author jyoun
  */
 public class Cash {
+
     private BigDecimal wallet;
     private BigDecimal change;
     private BigDecimal addedMoney;
@@ -39,4 +40,5 @@ public class Cash {
     public void setAddedMoney(BigDecimal addedMoney) {
         this.addedMoney = addedMoney;
     }
+
 }
