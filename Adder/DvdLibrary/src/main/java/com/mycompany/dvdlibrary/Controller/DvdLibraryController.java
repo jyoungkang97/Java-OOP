@@ -110,23 +110,24 @@ public class DvdLibraryController {
 
     private void editDvd() throws DvdExceptionsDAO {
 
-        view.displayEditDvdBanner();
-        List<Dvd> dvdList = dao.getAllDvds();
+                List<Dvd> dvdList = dao.getAllDvds();
         if (dvdList.size() > 0) {
             view.displayDvdList(dvdList);
             String title = view.getDvdTitle();
-            if (dvdList.contains(title)) {
-                view.enterNewInfo();
+            
+     
                 Dvd editDvd = view.getNewDvdInfo();
                 dao.removeDvd(title);
                 dao.editDvd(editDvd.getTitle(), editDvd);
                 view.displayEditDvdSuccessBanner();
-            } else {
+            } else { 
+            view.noDvdToEdit();
+            createDvd();
+            
 
-                view.noDvdToEdit();
-                createDvd();
             }
         }
-
     }
 }
+
+
