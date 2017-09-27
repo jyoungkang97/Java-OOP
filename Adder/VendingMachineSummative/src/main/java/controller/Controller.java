@@ -36,7 +36,7 @@ public class Controller {
         boolean keepGoing = true;
         while (keepGoing == true) {
             try {
-
+                
                 listItems();
                 money = addMoney();
                 BigDecimal itemPrice = getSelectedItemPrice(money);
@@ -50,7 +50,7 @@ public class Controller {
             } catch (ExceptionsDAO | InsufficientQuantity e) {
                 view.displayErrorMessage(e.getMessage());
             }
-        }
+        } repeat();
     }
 
     private BigDecimal getSelectedItemPrice(BigDecimal money) throws ExceptionsDAO, InsufficientFundsExceptions, InsufficientQuantity {

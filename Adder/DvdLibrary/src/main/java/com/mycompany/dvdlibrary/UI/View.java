@@ -115,7 +115,7 @@ public class View{
         
     }
     public void noDvdToEdit() {
-        io.print("There are no DVD's to edit.  Please add one to the library");
+        io.print("There is no DVD to edit.  Please add DVD to the library");
     }
     public void enterNewInfo() {
         io.print("Please input updated information for this DVD.");

@@ -66,8 +66,8 @@ public class Serviceimpl implements Service {
      */
     @Override
     public void pullItem(Item item) throws ExceptionsDAO {
-        while(item.getQuantity() > 0) {
-                item.setQuantity(item.getQuantity() - 1);
+        if(item.getQuantity() > 0) {
+                item.setQuantity((item.getQuantity() )-1 ) ;
         
         dao.update(item);
     }

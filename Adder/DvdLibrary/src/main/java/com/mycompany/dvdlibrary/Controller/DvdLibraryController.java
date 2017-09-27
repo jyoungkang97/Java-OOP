@@ -98,6 +98,7 @@ public class DvdLibraryController {
         String title = view.getDvdTitleChoice();
         dao.removeDvd(title);
         view.displayRemoveSuccessBanner();
+       
     }
 
     private void unknownCommand() {
@@ -110,24 +111,21 @@ public class DvdLibraryController {
 
     private void editDvd() throws DvdExceptionsDAO {
 
-                List<Dvd> dvdList = dao.getAllDvds();
+        List<Dvd> dvdList = dao.getAllDvds();
         if (dvdList.size() > 0) {
             view.displayDvdList(dvdList);
             String title = view.getDvdTitle();
-            
-     
-                Dvd editDvd = view.getNewDvdInfo();
-                dao.removeDvd(title);
-                dao.editDvd(editDvd.getTitle(), editDvd);
-                view.displayEditDvdSuccessBanner();
-            } else { 
+
+        if (dvdList.contains(title)) {   
+            Dvd editDvd = view.getNewDvdInfo();
+            dao.removeDvd(title);
+            dao.editDvd(editDvd.getTitle(), editDvd);
+            view.displayEditDvdSuccessBanner();
+        } else {
             view.noDvdToEdit();
             createDvd();
-            
 
-            }
         }
     }
 }
-
-
+}

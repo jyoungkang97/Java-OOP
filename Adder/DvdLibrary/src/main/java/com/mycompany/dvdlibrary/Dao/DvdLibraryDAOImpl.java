@@ -27,7 +27,7 @@ public class DvdLibraryDAOImpl implements DvdLibraryDAO {
     public static final String ROSTER_FILE = "Library.txt";
     public static final String DELIMITER = "::";
 
-    private Map<String, Dvd> Dvds = new HashMap<>();
+    private final Map<String, Dvd> Dvds = new HashMap<>();
 
     @Override
     public Dvd addDvd(String title, Dvd dvd)
@@ -80,9 +80,13 @@ public class DvdLibraryDAOImpl implements DvdLibraryDAO {
             currentLine = sc.nextLine();
             currentTokens = currentLine.split(DELIMITER);
             Dvd currentDvd = new Dvd(currentTokens[0]);
-            currentDvd.setTitle(currentTokens[1]);
-            currentDvd.setDirectorName(currentTokens[2]);
-            currentDvd.setReleaseDate(currentTokens[3]);
+            currentDvd.setDirectorName(currentTokens[1]);
+            currentDvd.setReleaseDate(currentTokens[2]);
+            currentDvd.setStudio(currentTokens[3]);
+            currentDvd.setRating(currentTokens[4]);
+            currentDvd.setNote(currentTokens[5]);
+            
+            Dvds.put(currentDvd.getTitle(), currentDvd);
         }
         sc.close();
     }
