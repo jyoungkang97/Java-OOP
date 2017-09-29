@@ -42,7 +42,8 @@ public class Controller {
                 BigDecimal itemPrice = getSelectedItemPrice(money);
                 try {
                     vendItem(item, money);
-                    keepGoing = false;
+          
+                    break;
                 } catch (InsufficientFundsExceptions e) {
                     view.displayErrorMessage(e.getMessage());
                 }
@@ -50,7 +51,7 @@ public class Controller {
             } catch (ExceptionsDAO | InsufficientQuantity e) {
                 view.displayErrorMessage(e.getMessage());
             }
-        } repeat();
+        } 
     }
 
     private BigDecimal getSelectedItemPrice(BigDecimal money) throws ExceptionsDAO, InsufficientFundsExceptions, InsufficientQuantity {

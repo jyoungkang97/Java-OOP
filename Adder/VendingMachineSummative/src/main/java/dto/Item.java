@@ -63,11 +63,11 @@ public class Item {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.itemName);
-        hash = 59 * hash + Objects.hashCode(this.itemPrice);
-        hash = 59 * hash + Objects.hashCode(this.itemId);
-        hash = 59 * hash + this.quantity;
-        hash = 59 * hash + Objects.hashCode(this.item);
+        hash = 31 * hash + Objects.hashCode(this.itemName);
+        hash = 31 * hash + Objects.hashCode(this.itemPrice);
+        hash = 31 * hash + Objects.hashCode(this.itemId);
+        hash = 31 * hash + this.quantity;
+        hash = 31 * hash + Objects.hashCode(this.item);
         return hash;
     }
 
@@ -100,6 +100,7 @@ public class Item {
         }
         return true;
     }
-    
+
+
 
 }

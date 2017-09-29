@@ -8,6 +8,7 @@ package dao;
 import Service.ExceptionsDAO;
 import Service.InsufficientQuantity;
 import dto.Item;
+import java.math.BigDecimal;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -38,9 +39,7 @@ public class InventoryTest {
     @Before
     public void setUp() throws ExceptionsDAO {
         List<Item>itemList = dao.getAllItems();
-        for (Item item : itemList) {
-            
-        }
+        
     }
     
     @After
@@ -52,6 +51,8 @@ public class InventoryTest {
      */
     @Test
     public void testGetAllItems() throws Exception {
+        assertEquals(5, dao.getAllItems().size());
+        
     }
 
     /**
@@ -59,6 +60,9 @@ public class InventoryTest {
      */
     @Test
     public void testBigDecimal() throws Exception {
+        BigDecimal bd1 = new BigDecimal (1000);
+        BigDecimal bd2 = new BigDecimal (1000);
+        assertEquals(bd1,bd2);
     }
 
     /**
@@ -66,13 +70,9 @@ public class InventoryTest {
      */
     @Test
     public void testGetItem() throws Exception {
-    }
-
-    /**
-     * Test of update method, of class Inventory.
-     */
-    @Test
-    public void testUpdate() throws Exception {
+        Item fromInventory = dao.getItem("B01");
+        assertEquals("TWIX", fromInventory.getItemName());
+        assertEquals(4, fromInventory.getQuantity());
     }
 
 }
